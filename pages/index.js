@@ -12,12 +12,19 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Campaign: Grave Mistake</h1>
+        <h1 className={styles.title}>This Might Be a Grave Mistake</h1>
 
-        <div>
-          <Link href="/character">
-            <a>See your character</a>
-          </Link>
+        <div className={styles.grid}>
+          <div className={styles.card}>
+            <Link href="/character">
+              <a>See Your Character</a>
+            </Link>
+          </div>
+          <div className={styles.card}>
+            <Link href="/history">
+              <a>Brief History of Discworld</a>
+            </Link>
+          </div>
         </div>
       </main>
 

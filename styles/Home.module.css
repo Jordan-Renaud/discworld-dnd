@@ -108,6 +108,16 @@
   margin-left: 0.5rem;
 }
 
+.textContainer {
+  width: 940px;
+}
+
+.text {
+  font-size: 18px;
+  line-height: 27px;
+  text-align: justify;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

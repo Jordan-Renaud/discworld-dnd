@@ -21,6 +21,11 @@ export default function Home() {
             </Link>
           </div>
           <div className={styles.card}>
+            <Link href="/characters">
+              <a>Current Characters</a>
+            </Link>
+          </div>
+          <div className={styles.card}>
             <Link href="/history">
               <a>Brief History of Discworld</a>
             </Link>

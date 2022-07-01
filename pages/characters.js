@@ -20,8 +20,8 @@ export default function Characters() {
             <q>
               What is there in this world that truly makes living worthwhile?
               <br />
-              Death thought about it. "CATS" he said eventually. "CATS ARE
-              NICE."
+              Death thought about it. &quot;CATS&quot; he said eventually.
+              &quot;CATS ARE NICE.&quot;
             </q>
             <Image
               src={death}
@@ -47,11 +47,11 @@ export default function Characters() {
             />
             <p>
               The Librarian is known for his violent reaction whenever he hears
-              anyone refer to him as a "monkey" (orang-utans are apes). He
-              speaks an elaborate language whose vocabulary consists of the
-              single word Ook (and its antonym "eek" - where "ook" means yes,
-              "eek" tends to mean no). Nonetheless, most people seem to be able
-              to understand him.
+              anyone refer to him as a &quot;monkey&quot; (orang-utans are
+              apes). He speaks an elaborate language whose vocabulary consists
+              of the single word Ook (and its antonym &quot;eek&quot; - where
+              &quot;ook&quot; means yes, &quot;eek&quot; tends to mean no).
+              Nonetheless, most people seem to be able to understand him.
             </p>
           </div>
         </div>

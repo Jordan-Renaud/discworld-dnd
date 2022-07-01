@@ -19,19 +19,20 @@ export default function History() {
           height="540"
           alt="A turtle with four elephants on its back, with a flat landmass on the backs of the elephants."
         />
-        <q>It's turtles all the way down, mate</q>
+        <q>It&apos;s turtles all the way down, mate</q>
         <div className={styles.textContainer}>
           <p className={styles.text}>
-            Great A'Tuin the turtle comes, swimming slowly through the
+            Great A&apos;Tuin the turtle comes, swimming slowly through the
             interstellar gulf, hydrogen frost on his ponderous limbs, his huge
             and ancient shell pocked with meteor craters. Through sea-sized eyes
             that are crusted with rheum and asteroid dust. He stares fixedly at
             the Destination. In a brain bigger than a city, with geological
             slowness, He thinks only of the Weight. Most of the weight is of
-            course accounted for by Berilia, Tubul, Great T'Phon and Jerakeen,
-            the four giant elephants upon whose broad and star-tanned shoulders
-            the disc of the World rests, garlanded by the long waterfall at its
-            vast circumference and domed by the baby-blue vault of Heaven.
+            course accounted for by Berilia, Tubul, Great T&apos;Phon and
+            Jerakeen, the four giant elephants upon whose broad and star-tanned
+            shoulders the disc of the World rests, garlanded by the long
+            waterfall at its vast circumference and domed by the baby-blue vault
+            of Heaven.
           </p>
         </div>
       </main>

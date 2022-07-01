@@ -33,11 +33,21 @@ export const defaultCharacters = [
 ];
 
 export const characterClasses = [
-  { name: "", quote: "", image: "", description: "" },
-  { name: "", quote: "", image: "", description: "" },
-  { name: "", quote: "", image: "", description: "" },
-  { name: "", quote: "", image: "", description: "" },
-  { name: "", quote: "", image: "", description: "" },
-  { name: "", quote: "", image: "", description: "" },
-  { name: "", quote: "", image: "", description: "" },
+  {
+    name: "Dwarf",
+    quote:
+      "All dwarfs have beards and wear up to twelve layers of clothing. Gender is more or less optional.",
+    image: "/character-types/dwarf.jpeg",
+    imageAlt: "a dwarf",
+    pros: ["Strength: +1", "Health Points: +1"],
+    cons: ["Intolerance (Trolls): -5", "Literal Minded: -10"],
+    description:
+      "They’re typically around 4’ tall, but very stocky and hence much heavier than a human of that height – around 130 lbs., even without all the armour they habitually wear.",
+  },
+  // { name: "", quote: "", image: "", pros: "", cons: "", description: "" },
+  // { name: "", quote: "", image: "", pros: "", cons: "", description: "" },
+  // { name: "", quote: "", image: "", pros: "", cons: "", description: "" },
+  // { name: "", quote: "", image: "", pros: "", cons: "", description: "" },
+  // { name: "", quote: "", image: "", pros: "", cons: "", description: "" },
+  // { name: "", quote: "", image: "", pros: "", cons: "", description: "" },
 ];

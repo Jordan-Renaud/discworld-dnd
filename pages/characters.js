@@ -1,7 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Image from "next/image";
-import { defaultCharacters } from "../data/defaultCharacters";
+import DefaultCharacterCard from "../components/DefaultCharacterCard";
+import CharacterClassCard from "../components/CharacterClassCard";
+import { defaultCharacters, characterClasses } from "../data/defaultCharacters";
 
 export default function Characters() {
   return (
@@ -13,30 +14,20 @@ export default function Characters() {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>Characters</h1>
+        <h2>Known Characters</h2>
         <div className={styles.grid}>
-          {defaultCharacters.map((character) => {
-            return (
-              <div className={styles.simpleCard} key={character.name}>
-                <h2>{character.name}</h2>
-                <div className={styles.grid}>
-                  <div className={styles.imageContainer}>
-                    <Image
-                      src={character.image}
-                      width="300"
-                      height="300"
-                      alt={character.imageAlt}
-                      layout="intrinsic"
-                      objectFit="cover"
-                    />
-                  </div>
-                  <div className={styles.quoteContainer}>
-                    <q>{character.quote}</q>
-                  </div>
-                </div>
-                <p className={styles.text}>{character.description}</p>
-              </div>
-            );
-          })}
+          {defaultCharacters.map((character) => (
+            <DefaultCharacterCard character={character} key={character.name} />
+          ))}
+        </div>
+        <h2>Characters Classes</h2>
+        <div className={styles.grid}>
+          {characterClasses.map((characterClass) => (
+            <CharacterClassCard
+              character={characterClass}
+              key={characterClass.name}
+            />
+          ))}
         </div>
       </main>
     </div>

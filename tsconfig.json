@@ -10,6 +10,7 @@
     "incremental": true,
     "esModuleInterop": true,
     "module": "esnext",
+    "moduleResolution": "Node",
     "isolatedModules": true,
     "jsx": "preserve"
   },

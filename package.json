@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "db:admin": "npx prisma studio",
+    "db:update": "npx prisma generate",
     "db:push": "prisma db push"
   },
   "dependencies": {

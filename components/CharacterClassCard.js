@@ -5,6 +5,7 @@ export default function CharacterClassCard({ character }) {
   return (
     <div className={styles.simpleCard}>
       <h2>{character.name}</h2>
+      <p>{character.startingPoints} points</p>
       <div className={styles.grid}>
         <div className={styles.imageContainer}>
           <Image

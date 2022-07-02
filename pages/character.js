@@ -16,25 +16,29 @@ export default function Character() {
         <meta name="description" content="Character" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Character</h1>
-      {characterExists ? null : (
-        <button className={styles.card}>Create New Character</button>
-      )}
-      {backstoryExists ? null : (
-        <button
-          className={styles.card}
-          onClick={() =>
-            questionaireShown
-              ? setQuestionaireShown(false)
-              : setQuestionaireShown(true)
-          }
-        >
-          Create New Backstory
-        </button>
-      )}
-      {questionaireShown ? (
-        <BackstoryQuestionaire character={character} />
-      ) : null}
+      <div className={styles.main}>
+        <h1 className={styles.title}>Character</h1>
+        <div className={styles.grid}>
+          {characterExists ? null : (
+            <button className={styles.card}>Create New Character</button>
+          )}
+          {backstoryExists ? null : (
+            <button
+              className={styles.card}
+              onClick={() =>
+                questionaireShown
+                  ? setQuestionaireShown(false)
+                  : setQuestionaireShown(true)
+              }
+            >
+              Create New Backstory
+            </button>
+          )}
+        </div>
+        {questionaireShown ? (
+          <BackstoryQuestionaire character={character} />
+        ) : null}
+      </div>
     </div>
   );
 }

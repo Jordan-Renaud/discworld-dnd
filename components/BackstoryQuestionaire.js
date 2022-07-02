@@ -1,24 +1,36 @@
+import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
+import Question from "./Question";
 import { backstoryQuestions } from "../data/backstoryQuestions";
 
-export default function BackstoryQuestionaire({ character }) {
+export default function BackstoryQuestionaire({
+  character,
+  setBackstoryExists,
+}) {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(
+    backstoryQuestions[currentQuestionIndex]
+  );
+
+  useEffect(() => {
+    setCurrentQuestion(backstoryQuestions[currentQuestionIndex]);
+  }, [currentQuestionIndex]);
+
+  function handleClick(e) {
+    e.preventDefault();
+    currentQuestionIndex === backstoryQuestions.length - 1
+      ? setBackstoryExists(true)
+      : setCurrentQuestionIndex(currentQuestionIndex + 1);
+  }
+
   return (
     <div>
-      <h2>BackstoryQuestionaire</h2>
+      <h2>Backstory Questionaire for {character}</h2>
+      <h4></h4>
       <form>
         <ul>
-          {backstoryQuestions.map((question, index) => (
-            <li key={index}>
-              <label htmlFor={`Question ${index}`}>{question.question}</label>
-              <br />
-
-              <input
-                type="text"
-                id={`Question ${index}`}
-                name={`Question ${index}`}
-              />
-            </li>
-          ))}
+          <Question question={currentQuestion} index={currentQuestionIndex} />
+          <button onClick={handleClick}>Submit</button>
         </ul>
       </form>
     </div>

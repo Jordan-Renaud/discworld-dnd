@@ -12,10 +12,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
-        <AuthButton />
-      </header>
-
       <main className={styles.main}>
         <h1 className={styles.title}>This Might Be a Grave Mistake</h1>
 

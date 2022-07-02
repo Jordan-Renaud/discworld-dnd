@@ -5,6 +5,8 @@ export default function AuthButton() {
   const { data: session } = useSession();
 
   if (session) {
+    const firstName = (session.user.name || session.user.email).split(" ")[0];
+
     return (
       <div className={styles.container}>
         <button
@@ -16,16 +18,16 @@ export default function AuthButton() {
         </button>
         <div className={styles.profileContainer}>
           <img className={styles.profile} src={session.user.image} />
-          <div className={styles.name}>
-            {session.user.name || session.user.email}
-          </div>
+          <div className={styles.name}>{firstName}</div>
         </div>
       </div>
     );
   }
   return (
-    <button className={styles.button} onClick={() => signIn()}>
-      Sign in
-    </button>
+    <div className={styles.container}>
+      <button className={styles.button} onClick={() => signIn()}>
+        Sign in
+      </button>
+    </div>
   );
 }

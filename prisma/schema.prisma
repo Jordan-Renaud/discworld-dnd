@@ -65,3 +65,19 @@ model Character {
   id   Int    @id @default(autoincrement())
   name String
 }
+
+model MiscItemType {
+  id          String  @id @default(cuid())
+  name        String
+  cost        Decimal
+  weight      Decimal
+  description String  @db.Text
+}
+
+model MiscItem {
+  id          String  @id @default(cuid())
+  name        String
+  cost        Decimal
+  weight      Decimal
+  description String  @db.Text
+}

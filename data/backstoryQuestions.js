@@ -1,6 +1,7 @@
 export const backstoryQuestions = [
   {
     question: "What's three beliefs that your character holds?",
+    choiceAmountRequired: 3,
     choices: [
       "Thou shalt honour the law.",
       "Conspiracies rule the world. Wake up sheeple!",
@@ -15,6 +16,7 @@ export const backstoryQuestions = [
   {
     question:
       "Name two of your character’s most interesting personality traits that a stranger would remember after encountering them in a crowded tavern.",
+    choiceAmountRequired: 2,
     choices: [
       "Selfless",
       "Intense",
@@ -30,6 +32,7 @@ export const backstoryQuestions = [
   },
   {
     question: "What’s one lie your character believes about themselves?",
+    choiceAmountRequired: 1,
     choices: [
       "I am a good person.",
       "I am a bad person.",
@@ -40,6 +43,7 @@ export const backstoryQuestions = [
   },
   {
     question: "What is your character going to do when the adventure's over?",
+    choiceAmountRequired: 1,
     choices: [
       "Overthrow the government.",
       "Cause mayhem.",
@@ -56,6 +60,7 @@ export const backstoryQuestions = [
   {
     question:
       "How would you react to seeing someone being mugged in an alleyway by a man wielding a sword?",
+    choiceAmountRequired: 1,
     choices: [
       "Run away.",
       "I draw my sword and run directly at the mugger, screaming.",

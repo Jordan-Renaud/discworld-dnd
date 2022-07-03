@@ -106,3 +106,34 @@ model Character {
   id   String @id @default(cuid())
   name String
 }
+
+// Tihs can be given to a character
+model MeleeWeapon {
+  id          String  @id @default(cuid())
+  name        String
+  isThrowable Boolean
+  dexterity   Int
+  damage      Int
+  reach       Int
+  parry       Int
+  cost        Decimal
+  weight      Decimal
+  strength    Int
+  description String  @db.Text
+}
+
+// Tihs can be given to a character
+model MissileWeapon {
+  id          String  @id @default(cuid())
+  name        String
+  isThrowable Boolean
+  dexterity   Int
+  damage      Int
+  range       Int
+  parry       Int
+  cost        Decimal
+  weight      Decimal
+  strength    Int
+  shots       Int
+  description String  @db.Text
+}

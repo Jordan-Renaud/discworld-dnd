@@ -11,4 +11,23 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    async session({ session, user }) {
+      session.user.isDungeonMaster = user.isDungeonMaster
+      return session
+    },
+    async signIn({ user }) {
+      const dmEmail = process.env.DUNGEON_MASTER_EMAIL
+      // Set/unset the DM
+      await prisma.user
+        .update({
+          where: { email: user.email },
+          data: {
+            isDungeonMaster: user.email === dmEmail
+          }
+        })
+
+      return true
+    }
+  }
 })

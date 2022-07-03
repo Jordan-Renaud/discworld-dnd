@@ -61,7 +61,48 @@ model VerificationToken {
 
 // Domain specific
 
+// This is the archetype used by characters
+// Will be used to create characters for a player
+model CharacterType {
+  id     String @id @default(cuid())
+  name   String
+  points Int
+}
+
+// This is the archetype used by weapons
+// They will be used to create actual weapons which a character can wield
+model MeleeWeaponType {
+  id          String  @id @default(cuid())
+  name        String
+  isThrowable Boolean
+  dexterity   Int
+  damage      Int
+  reach       Int
+  parry       Int
+  cost        Decimal
+  weight      Decimal
+  strength    Int
+  description String  @db.Text
+}
+
+// This is the archetype used by weapons
+model MissileWeaponType {
+  id          String  @id @default(cuid())
+  name        String
+  isThrowable Boolean
+  dexterity   Int
+  damage      Int
+  range       Int
+  parry       Int
+  cost        Decimal
+  weight      Decimal
+  strength    Int
+  shots       Int
+  description String  @db.Text
+}
+
+// This is a player's character or NPC
 model Character {
-  id   Int    @id @default(autoincrement())
+  id   String @id @default(cuid())
   name String
 }

@@ -5,10 +5,10 @@ export const backstoryQuestions = [
     choices: [
       "Thou shalt honour the law.",
       "Conspiracies rule the world. Wake up sheeple!",
-      "I'm just kinda racist against trolls.",
+      "I have a die hard feud against trolls.",
       "I hallucinate a giant hand in the sky that directs my destiny.",
       "I believe cheese is an offense.",
-      "Religions are basically Cults with more steps.",
+      "Religions are basically cults with more steps.",
       "Eat the rich! Eat the poor! I'm hungry (and slightly cannibalistic when not fed)!",
       "Level 5 vegan",
     ],

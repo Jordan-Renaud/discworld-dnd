@@ -35,7 +35,7 @@ export default function Character() {
             </button>
           )}
         </div>
-        {questionaireShown ? (
+        {questionaireShown && !backstoryExists ? (
           <BackstoryQuestionaire
             character={character}
             setBackstoryExists={setBackstoryExists}

@@ -46,13 +46,17 @@ export default function BackstoryQuestionaire({
   }
 
   function handleAnswer(answer) {
+    console.log(answers);
     const newAnswers = [...answers];
     if (newAnswers[currentQuestionIndex].includes(answer)) {
       newAnswers[currentQuestionIndex] = newAnswers[
         currentQuestionIndex
       ].filter((a) => a !== answer);
     } else {
-      newAnswers[currentQuestionIndex].push(answer);
+      newAnswers[currentQuestionIndex] = [
+        ...newAnswers[currentQuestionIndex],
+        answer,
+      ];
     }
     setAnswers(newAnswers);
   }
@@ -60,6 +64,7 @@ export default function BackstoryQuestionaire({
   return (
     <div>
       <h2>Backstory Questionaire for {character}</h2>
+      {currentQuestionIndex}
       <h4>
         {currentQuestionIndex + 1}/{backstoryQuestions.length}
       </h4>

@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/components/Question.module.css";
 
-export default function Question({ question, index, answers, setAnswers }) {
+export default function Question({
+  question,
+  index,
+  answers,
+  setAnswers,
+  ownChoiceValue,
+}) {
   const [isOwnChoiceSelected, setIsOwnChoiceSelected] = useState(false);
   const [ownChoice, setOwnChoice] = useState("");
 
@@ -12,10 +18,23 @@ export default function Question({ question, index, answers, setAnswers }) {
     setAnswers(target.value);
   }
 
-  function updateOwnChoice(e) {
+  function updateOwnChoiceValue(e) {
     e.preventDefault();
     setOwnChoice(e.target.value);
   }
+
+  //handles own choice
+  useEffect(() => {
+    if (isOwnChoiceSelected && answers.length >= question.choiceAmountRequired)
+      return;
+
+    if (
+      isOwnChoiceSelected ||
+      (!isOwnChoiceSelected && answers.includes("Own Choice"))
+    ) {
+      setAnswers("Own Choice");
+    }
+  }, [isOwnChoiceSelected]);
 
   return (
     <section>
@@ -53,8 +72,16 @@ export default function Question({ question, index, answers, setAnswers }) {
             type="checkbox"
             id="Own choice"
             name="Own choice"
+            disabled={
+              !answers.includes("Own Choice") &&
+              answers.length === question.choiceAmountRequired
+            }
           />
-          <input type="text" onChange={updateOwnChoice} value={ownChoice} />
+          <input
+            type="text"
+            onChange={updateOwnChoiceValue}
+            value={ownChoice}
+          />
         </li>
       </ul>
     </section>

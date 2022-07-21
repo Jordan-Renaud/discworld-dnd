@@ -3,12 +3,16 @@ import styles from "../styles/Home.module.css";
 import Question from "./Question";
 import { backstoryQuestions } from "../data/backstoryQuestions";
 
-// function formatRepsonse(questions, answers, ownChoiceAnswers) {
-//   const response = [];
-//   questions.forEach(question => {
+function formatRepsonse(questions, userAnswers, userOwnChoiceAnswers) {
+  const response = questions.map((questionData, index) => {
+    const updatedUserAnswers = userAnswers[index].map((updatedUserAnswer) =>
+      updatedUserAnswer.replace("Own choice", userOwnChoiceAnswers[index])
+    );
+    return { question: questionData.question, answers: updatedUserAnswers };
+  });
 
-//   })
-// }
+  return response;
+}
 
 export default function BackstoryQuestionaire({
   character,
@@ -58,7 +62,6 @@ export default function BackstoryQuestionaire({
         answer,
       ];
     }
-    console.log(newAnswers);
     setAnswers(newAnswers);
   }
 
@@ -66,7 +69,6 @@ export default function BackstoryQuestionaire({
   function handleOwnChoice(answer) {
     const newAnswers = [...ownChoiceAnswers];
     newAnswers[currentQuestionIndex] = answer;
-    console.log(newAnswers);
     setOwnChoiceAnswers(newAnswers);
   }
 
@@ -82,7 +84,7 @@ export default function BackstoryQuestionaire({
     e.preventDefault();
     setBackstoryExists(true);
     console.log("the data has been submitted");
-    console.log();
+    console.log(formatRepsonse(backstoryQuestions, answers, ownChoiceAnswers));
   }
 
   return (

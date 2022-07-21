@@ -3,17 +3,30 @@ import styles from "../styles/Home.module.css";
 import Question from "./Question";
 import { backstoryQuestions } from "../data/backstoryQuestions";
 
+// function formatRepsonse(questions, answers, ownChoiceAnswers) {
+//   const response = [];
+//   questions.forEach(question => {
+
+//   })
+// }
+
 export default function BackstoryQuestionaire({
   character,
   setBackstoryExists,
 }) {
-  //question management
+  // Question useStates
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(
     backstoryQuestions[currentQuestionIndex]
   );
-
-  //button management
+  // Answer useStates
+  const [answers, setAnswers] = useState(
+    new Array(backstoryQuestions.length).fill([])
+  );
+  const [ownChoiceAnswers, setOwnChoiceAnswers] = useState(
+    new Array(backstoryQuestions.length).fill("")
+  );
+  // Button useStates
   const [nextButtonExists, setNextButtonExists] = useState(
     currentQuestionIndex < backstoryQuestions.length - 1
   );
@@ -21,11 +34,7 @@ export default function BackstoryQuestionaire({
     currentQuestionIndex !== 0
   );
 
-  //answer management
-  const [answers, setAnswers] = useState(
-    new Array(backstoryQuestions.length).fill([])
-  );
-
+  // Updates Question, and button state
   useEffect(() => {
     const isNextButtonShown =
       currentQuestionIndex < backstoryQuestions.length - 1;
@@ -36,20 +45,7 @@ export default function BackstoryQuestionaire({
     setNextButtonExists(isNextButtonShown);
   }, [currentQuestionIndex]);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setBackstoryExists(true);
-    console.log("the data has been submitted");
-  }
-
-  function handleButtonClick(e) {
-    e.preventDefault();
-
-    e.target.value === "next"
-      ? setCurrentQuestionIndex(currentQuestionIndex + 1)
-      : setCurrentQuestionIndex(currentQuestionIndex - 1);
-  }
-
+  // Updates answers
   function handleAnswer(answer) {
     const newAnswers = [...answers];
     if (newAnswers[currentQuestionIndex].includes(answer)) {
@@ -62,7 +58,31 @@ export default function BackstoryQuestionaire({
         answer,
       ];
     }
+    console.log(newAnswers);
     setAnswers(newAnswers);
+  }
+
+  // Updates own choice answers
+  function handleOwnChoice(answer) {
+    const newAnswers = [...ownChoiceAnswers];
+    newAnswers[currentQuestionIndex] = answer;
+    console.log(newAnswers);
+    setOwnChoiceAnswers(newAnswers);
+  }
+
+  function handleNavigationButtonClick(e) {
+    e.preventDefault();
+
+    e.target.value === "next"
+      ? setCurrentQuestionIndex(currentQuestionIndex + 1)
+      : setCurrentQuestionIndex(currentQuestionIndex - 1);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setBackstoryExists(true);
+    console.log("the data has been submitted");
+    console.log();
   }
 
   return (
@@ -77,6 +97,8 @@ export default function BackstoryQuestionaire({
           index={currentQuestionIndex}
           answers={answers[currentQuestionIndex]}
           setAnswers={handleAnswer}
+          ownChoice={ownChoiceAnswers[currentQuestionIndex]}
+          setOwnChoice={handleOwnChoice}
         />
 
         <div>
@@ -84,7 +106,7 @@ export default function BackstoryQuestionaire({
             <button
               className={styles.card}
               value="previous"
-              onClick={handleButtonClick}
+              onClick={handleNavigationButtonClick}
             >
               Previous
             </button>
@@ -94,7 +116,7 @@ export default function BackstoryQuestionaire({
             <button
               className={styles.card}
               value="next"
-              onClick={handleButtonClick}
+              onClick={handleNavigationButtonClick}
             >
               Next
             </button>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/components/Question.module.css";
 
 export default function Question({
@@ -6,10 +6,10 @@ export default function Question({
   index,
   answers,
   setAnswers,
-  ownChoiceValue,
+  ownChoice,
+  setOwnChoice,
 }) {
-  const [isOwnChoiceSelected, setIsOwnChoiceSelected] = useState(false);
-  const [ownChoice, setOwnChoice] = useState("");
+  const [ownChoiceSelected, setOwnChoiceSelected] = useState(false);
 
   function handleChoiceSelection({ target }) {
     if (target.checked && answers.length >= question.choiceAmountRequired) {
@@ -17,24 +17,6 @@ export default function Question({
     }
     setAnswers(target.value);
   }
-
-  function updateOwnChoiceValue(e) {
-    e.preventDefault();
-    setOwnChoice(e.target.value);
-  }
-
-  //handles own choice
-  useEffect(() => {
-    if (isOwnChoiceSelected && answers.length >= question.choiceAmountRequired)
-      return;
-
-    if (
-      isOwnChoiceSelected ||
-      (!isOwnChoiceSelected && answers.includes("Own Choice"))
-    ) {
-      setAnswers("Own Choice");
-    }
-  }, [isOwnChoiceSelected]);
 
   return (
     <section>
@@ -62,25 +44,34 @@ export default function Question({
         ))}
         <li
           onClick={() =>
-            isOwnChoiceSelected
-              ? setIsOwnChoiceSelected(false)
-              : setIsOwnChoiceSelected(true)
+            ownChoiceSelected
+              ? setOwnChoiceSelected(false)
+              : setOwnChoiceSelected(true)
           }
         >
           <input
-            checked={isOwnChoiceSelected}
+            checked={
+              (answers.includes("Own choice") && ownChoiceSelected) ||
+              answers.includes("Own choice")
+            }
             type="checkbox"
             id="Own choice"
             name="Own choice"
+            value="Own choice"
+            onChange={handleChoiceSelection}
             disabled={
-              !answers.includes("Own Choice") &&
+              !answers.includes("Own choice") &&
               answers.length === question.choiceAmountRequired
             }
           />
           <input
             type="text"
-            onChange={updateOwnChoiceValue}
+            onChange={(e) => setOwnChoice(e.target.value)}
             value={ownChoice}
+            disabled={
+              !answers.includes("Own choice") &&
+              answers.length === question.choiceAmountRequired
+            }
           />
         </li>
       </ul>

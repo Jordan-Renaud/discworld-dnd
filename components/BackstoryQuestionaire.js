@@ -14,11 +14,12 @@ export default function BackstoryQuestionaire({
   );
 
   //button management
-  const [nextButtonExists, setNextButtonExists] = useState(true);
-  const isNextButtonShown =
-    currentQuestionIndex < backstoryQuestions.length - 1;
-  const isPreviousButtonShown = currentQuestionIndex !== 0;
-  const [previousButtonExists, setPreviousButtonExists] = useState(false);
+  const [nextButtonExists, setNextButtonExists] = useState(
+    currentQuestionIndex < backstoryQuestions.length - 1
+  );
+  const [previousButtonExists, setPreviousButtonExists] = useState(
+    currentQuestionIndex !== 0
+  );
 
   //answer management
   const [answers, setAnswers] = useState(
@@ -26,6 +27,10 @@ export default function BackstoryQuestionaire({
   );
 
   useEffect(() => {
+    const isNextButtonShown =
+      currentQuestionIndex < backstoryQuestions.length - 1;
+    const isPreviousButtonShown = currentQuestionIndex !== 0;
+
     setCurrentQuestion(backstoryQuestions[currentQuestionIndex]);
     setPreviousButtonExists(isPreviousButtonShown);
     setNextButtonExists(isNextButtonShown);
@@ -46,7 +51,6 @@ export default function BackstoryQuestionaire({
   }
 
   function handleAnswer(answer) {
-    console.log(answers);
     const newAnswers = [...answers];
     if (newAnswers[currentQuestionIndex].includes(answer)) {
       newAnswers[currentQuestionIndex] = newAnswers[
@@ -64,7 +68,6 @@ export default function BackstoryQuestionaire({
   return (
     <div>
       <h2>Backstory Questionaire for {character}</h2>
-      {currentQuestionIndex}
       <h4>
         {currentQuestionIndex + 1}/{backstoryQuestions.length}
       </h4>
@@ -76,31 +79,37 @@ export default function BackstoryQuestionaire({
           setAnswers={handleAnswer}
         />
 
-        {previousButtonExists ? (
-          <button
-            className={styles.card}
-            value="previous"
-            onClick={handleButtonClick}
-          >
-            Previous
-          </button>
-        ) : null}
+        <div>
+          {previousButtonExists && (
+            <button
+              className={styles.card}
+              value="previous"
+              onClick={handleButtonClick}
+            >
+              Previous
+            </button>
+          )}
 
-        {nextButtonExists ? (
-          <button
-            className={styles.card}
-            value="next"
-            onClick={handleButtonClick}
-          >
-            Next
-          </button>
-        ) : null}
+          {nextButtonExists && (
+            <button
+              className={styles.card}
+              value="next"
+              onClick={handleButtonClick}
+            >
+              Next
+            </button>
+          )}
 
-        {nextButtonExists ? null : (
-          <button className={styles.card} value="submit" onClick={handleSubmit}>
-            Submit
-          </button>
-        )}
+          {nextButtonExists ? null : (
+            <button
+              className={styles.card}
+              value="submit"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

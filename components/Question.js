@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "../styles/components/Question.module.css";
 
 export default function Question({
@@ -9,8 +8,6 @@ export default function Question({
   ownChoice,
   setOwnChoice,
 }) {
-  const [ownChoiceSelected, setOwnChoiceSelected] = useState(false);
-
   function handleChoiceSelection({ target }) {
     if (target.checked && answers.length >= question.choiceAmountRequired) {
       return;
@@ -42,18 +39,9 @@ export default function Question({
             </label>
           </li>
         ))}
-        <li
-          onClick={() =>
-            ownChoiceSelected
-              ? setOwnChoiceSelected(false)
-              : setOwnChoiceSelected(true)
-          }
-        >
+        <li>
           <input
-            checked={
-              (answers.includes("Own choice") && ownChoiceSelected) ||
-              answers.includes("Own choice")
-            }
+            checked={answers.includes("Own choice")}
             type="checkbox"
             id="Own choice"
             name="Own choice"

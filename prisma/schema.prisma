@@ -63,7 +63,7 @@ model VerificationToken {
 
 // This is the archetype used by characters
 // Will be used to create characters for a player
-model CharacterType {
+model CharacterPrototype {
   id     String @id @default(cuid())
   name   String
   points Int
@@ -71,7 +71,7 @@ model CharacterType {
 
 // This is the archetype used by weapons
 // They will be used to create actual weapons which a character can wield
-model MeleeWeaponType {
+model MeleeWeaponPrototype {
   id          String  @id @default(cuid())
   name        String
   isThrowable Boolean
@@ -86,7 +86,7 @@ model MeleeWeaponType {
 }
 
 // This is the archetype used by weapons
-model MissileWeaponType {
+model MissileWeaponPrototype {
   id          String  @id @default(cuid())
   name        String
   isThrowable Boolean

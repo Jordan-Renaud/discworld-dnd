@@ -66,7 +66,7 @@ model Character {
   name String
 }
 
-model ConsumableType {
+model ConsumablePrototype {
   id            String @id @default(cuid())
   name          String
   perkValue     Int

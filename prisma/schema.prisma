@@ -91,7 +91,7 @@ model AttributeModifier {
   occupations          Occupation[]
 }
 
-model PersonalityModifierType {
+model PersonalityModifierPrototype {
   id          String              @id @default(cuid())
   name        String
   description String              @db.Text

@@ -66,6 +66,24 @@ model Character {
   name String
 }
 
+model ClothingPrototype {
+  id               String  @id @default(cuid())
+  name             String
+  damageResistance Int
+  cost             Decimal
+  weight           Decimal
+  description      String
+}
+
+model Clothing {
+  id               String  @id @default(cuid())
+  name             String
+  damageResistance Int
+  cost             Decimal
+  weight           Decimal
+  description      String
+}
+
 model ConsumablePrototype {
   id            String @id @default(cuid())
   name          String

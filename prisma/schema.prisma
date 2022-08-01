@@ -66,6 +66,41 @@ model Character {
   name String
 }
 
+enum ModifierType {
+  ADVANTAGE
+  PERK
+  DISADVANTAGE
+  QUIRK
+  SKILL
+}
+
+model Occupation {
+  id                   String                    @id @default(cuid())
+  name                 String
+  points               Int
+  description          String                    @db.Text
+  personalityModifiers PersonalityModifierType[]
+  attributes           AttributeModifier[]
+}
+
+model AttributeModifier {
+  id                   String                    @id @default(cuid())
+  amount               Int
+  attribute            String
+  personalityModifiers PersonalityModifierType[]
+  occupations          Occupation[]
+}
+
+model PersonalityModifierPrototype {
+  id          String              @id @default(cuid())
+  name        String
+  description String              @db.Text
+  points      Int
+  type        ModifierType
+  attributes  AttributeModifier[]
+  occupations Occupation[]
+}
+
 model MiscItemPrototype {
   id          String  @id @default(cuid())
   name        String

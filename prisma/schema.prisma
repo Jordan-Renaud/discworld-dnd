@@ -180,19 +180,19 @@ enum ModifierType {
 }
 
 model Occupation {
-  id                   String                    @id @default(cuid())
+  id                   String                         @id @default(cuid())
   name                 String
   points               Int
-  description          String                    @db.Text
-  personalityModifiers PersonalityModifierType[]
+  description          String                         @db.Text
+  personalityModifiers PersonalityModifierPrototype[]
   attributes           AttributeModifier[]
 }
 
 model AttributeModifier {
-  id                   String                    @id @default(cuid())
+  id                   String                         @id @default(cuid())
   amount               Int
   attribute            String
-  personalityModifiers PersonalityModifierType[]
+  personalityModifiers PersonalityModifierPrototype[]
   occupations          Occupation[]
 }
 

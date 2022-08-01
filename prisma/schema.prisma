@@ -137,6 +137,75 @@ model MissileWeapon {
   shots       Int
 }
 
+model ClothingPrototype {
+  id               String  @id @default(cuid())
+  name             String
+  damageResistance Int
+  cost             Decimal
+  weight           Decimal
+  description      String
+}
+
+model Clothing {
+  id               String  @id @default(cuid())
+  name             String
+  damageResistance Int
+  cost             Decimal
+  weight           Decimal
+  description      String
+}
+
+model ConsumablePrototype {
+  id            String @id @default(cuid())
+  name          String
+  perkValue     Int
+  perkAttribute String
+  description   String @db.Text
+}
+
+model Consumable {
+  id            String @id @default(cuid())
+  name          String
+  perkValue     Int
+  perkAttribute String
+  description   String @db.Text
+}
+
+enum ModifierType {
+  ADVANTAGE
+  PERK
+  DISADVANTAGE
+  QUIRK
+  SKILL
+}
+
+model Occupation {
+  id                   String                    @id @default(cuid())
+  name                 String
+  points               Int
+  description          String                    @db.Text
+  personalityModifiers PersonalityModifierType[]
+  attributes           AttributeModifier[]
+}
+
+model AttributeModifier {
+  id                   String                    @id @default(cuid())
+  amount               Int
+  attribute            String
+  personalityModifiers PersonalityModifierType[]
+  occupations          Occupation[]
+}
+
+model PersonalityModifierPrototype {
+  id          String              @id @default(cuid())
+  name        String
+  description String              @db.Text
+  points      Int
+  type        ModifierType
+  attributes  AttributeModifier[]
+  occupations Occupation[]
+}
+
 model MiscItemPrototype {
   id          String  @id @default(cuid())
   name        String

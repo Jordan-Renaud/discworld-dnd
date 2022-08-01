@@ -8,6 +8,9 @@ export default function Question({
   ownChoice,
   setOwnChoice,
 }) {
+  const isDisabled = (answer) =>
+    !answers.includes(answer) &&
+    answers.length === question.choiceAmountRequired;
   function handleChoiceSelection({ target }) {
     if (target.checked && answers.length >= question.choiceAmountRequired) {
       return;
@@ -20,7 +23,7 @@ export default function Question({
       <label htmlFor={`Question ${index}`}>{question.question}</label>
       <ul>
         {question.choices.map((answer, index) => (
-          <li key={index}>
+          <li key={answer}>
             <input
               className={styles.checkbox}
               type="checkbox"
@@ -29,10 +32,7 @@ export default function Question({
               value={answer}
               checked={answers.includes(answer)}
               onChange={handleChoiceSelection}
-              disabled={
-                !answers.includes(answer) &&
-                answers.length === question.choiceAmountRequired
-              }
+              disabled={isDisabled(answer)}
             />
             <label className={styles.label} htmlFor={`Answer ${index}`}>
               {answer}
@@ -47,19 +47,13 @@ export default function Question({
             name="Own choice"
             value="Own choice"
             onChange={handleChoiceSelection}
-            disabled={
-              !answers.includes("Own choice") &&
-              answers.length === question.choiceAmountRequired
-            }
+            disabled={isDisabled("Own choice")}
           />
           <input
             type="text"
             onChange={(e) => setOwnChoice(e.target.value)}
             value={ownChoice}
-            disabled={
-              !answers.includes("Own choice") &&
-              answers.length === question.choiceAmountRequired
-            }
+            disabled={isDisabled("Own choice")}
           />
         </li>
       </ul>

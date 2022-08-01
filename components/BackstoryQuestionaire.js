@@ -20,9 +20,8 @@ export default function BackstoryQuestionaire({
 }) {
   // Question useStates
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(
-    backstoryQuestions[currentQuestionIndex]
-  );
+  const currentQuestion = backstoryQuestions[currentQuestionIndex];
+
   // Answer useStates
   const [answers, setAnswers] = useState(
     new Array(backstoryQuestions.length).fill([])
@@ -31,23 +30,10 @@ export default function BackstoryQuestionaire({
     new Array(backstoryQuestions.length).fill("")
   );
   // Button useStates
-  const [nextButtonExists, setNextButtonExists] = useState(
-    currentQuestionIndex < backstoryQuestions.length - 1
-  );
-  const [previousButtonExists, setPreviousButtonExists] = useState(
-    currentQuestionIndex !== 0
-  );
-
-  // Updates Question, and button state
-  useEffect(() => {
-    const isNextButtonShown =
-      currentQuestionIndex < backstoryQuestions.length - 1;
-    const isPreviousButtonShown = currentQuestionIndex !== 0;
-
-    setCurrentQuestion(backstoryQuestions[currentQuestionIndex]);
-    setPreviousButtonExists(isPreviousButtonShown);
-    setNextButtonExists(isNextButtonShown);
-  }, [currentQuestionIndex]);
+  const nextButtonExists = currentQuestionIndex < backstoryQuestions.length - 1;
+  const previousButtonExists = currentQuestionIndex !== 0;
+  const submitButtonExists =
+    currentQuestionIndex === backstoryQuestions.length - 1;
 
   // Updates answers
   function handleAnswer(answer) {
@@ -74,7 +60,9 @@ export default function BackstoryQuestionaire({
 
   function handleNavigationButtonClick(e) {
     e.preventDefault();
-
+    // setCurrentQuestionIndex(
+    //   currentQuestionIndex + e.target.value === "next" ? 1 : -1
+    // );
     e.target.value === "next"
       ? setCurrentQuestionIndex(currentQuestionIndex + 1)
       : setCurrentQuestionIndex(currentQuestionIndex - 1);
@@ -89,6 +77,8 @@ export default function BackstoryQuestionaire({
 
   return (
     <div>
+      {console.log("Current Question Index", currentQuestionIndex)}
+      {console.log("Current Question", currentQuestion)}
       <h2>Backstory Questionaire for {character}</h2>
       <h4>
         {currentQuestionIndex + 1}/{backstoryQuestions.length}
@@ -124,7 +114,7 @@ export default function BackstoryQuestionaire({
             </button>
           )}
 
-          {nextButtonExists ? null : (
+          {submitButtonExists && (
             <button
               className={styles.card}
               value="submit"

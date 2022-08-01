@@ -100,3 +100,19 @@ model PersonalityModifierPrototype {
   attributes  AttributeModifier[]
   occupations Occupation[]
 }
+
+model MiscItemPrototype {
+  id          String  @id @default(cuid())
+  name        String
+  cost        Decimal
+  weight      Decimal
+  description String  @db.Text
+}
+
+model MiscItem {
+  id          String  @id @default(cuid())
+  name        String
+  cost        Decimal
+  weight      Decimal
+  description String  @db.Text
+}

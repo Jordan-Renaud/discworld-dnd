@@ -135,5 +135,20 @@ model MissileWeapon {
   weight      Decimal
   strength    Int
   shots       Int
+}
+
+model MiscItemPrototype {
+  id          String  @id @default(cuid())
+  name        String
+  cost        Decimal
+  weight      Decimal
+  description String  @db.Text
+}
+
+model MiscItem {
+  id          String  @id @default(cuid())
+  name        String
+  cost        Decimal
+  weight      Decimal
   description String  @db.Text
 }

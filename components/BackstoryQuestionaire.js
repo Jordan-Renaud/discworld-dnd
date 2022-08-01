@@ -58,14 +58,10 @@ export default function BackstoryQuestionaire({
     setOwnChoiceAnswers(newAnswers);
   }
 
-  function handleNavigationButtonClick(e) {
-    e.preventDefault();
-    // setCurrentQuestionIndex(
-    //   currentQuestionIndex + e.target.value === "next" ? 1 : -1
-    // );
-    e.target.value === "next"
-      ? setCurrentQuestionIndex(currentQuestionIndex + 1)
-      : setCurrentQuestionIndex(currentQuestionIndex - 1);
+  function handleNavigation(e) {
+    setCurrentQuestionIndex(
+      currentQuestionIndex + (e.target.value === "next" ? 1 : -1)
+    );
   }
 
   function handleSubmit(e) {
@@ -83,7 +79,14 @@ export default function BackstoryQuestionaire({
       <h4>
         {currentQuestionIndex + 1}/{backstoryQuestions.length}
       </h4>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          submitButtonExists
+            ? handleSubmit(e)
+            : handleNavigation({ target: { value: "next" } });
+        }}
+      >
         <Question
           question={currentQuestion}
           index={currentQuestionIndex}
@@ -94,26 +97,6 @@ export default function BackstoryQuestionaire({
         />
 
         <div>
-          {previousButtonExists && (
-            <button
-              className={styles.card}
-              value="previous"
-              onClick={handleNavigationButtonClick}
-            >
-              Previous
-            </button>
-          )}
-
-          {nextButtonExists && (
-            <button
-              className={styles.card}
-              value="next"
-              onClick={handleNavigationButtonClick}
-            >
-              Next
-            </button>
-          )}
-
           {submitButtonExists && (
             <button
               className={styles.card}
@@ -125,6 +108,27 @@ export default function BackstoryQuestionaire({
           )}
         </div>
       </form>
+      <div>
+        {previousButtonExists && (
+          <button
+            className={styles.card}
+            value="previous"
+            onClick={handleNavigation}
+          >
+            Previous
+          </button>
+        )}
+
+        {nextButtonExists && (
+          <button
+            className={styles.card}
+            value="next"
+            onClick={handleNavigation}
+          >
+            Next
+          </button>
+        )}
+      </div>
     </div>
   );
 }

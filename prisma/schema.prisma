@@ -66,6 +66,22 @@ model Character {
   name String
 }
 
+model ConsumablePrototype {
+  id            String @id @default(cuid())
+  name          String
+  perkValue     Int
+  perkAttribute String
+  description   String @db.Text
+}
+
+model Consumable {
+  id            String @id @default(cuid())
+  name          String
+  perkValue     Int
+  perkAttribute String
+  description   String @db.Text
+}
+
 enum ModifierType {
   ADVANTAGE
   PERK

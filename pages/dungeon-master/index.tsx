@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -25,6 +26,8 @@ export default function DungeonMasterDashboard() {
       </Head>
       <main>
         <h1>Dungeon Master Dashboard</h1>
+        <h2>Manage Weapons</h2>
+        <Link href="/dungeon-master/melee-weapons/">Melee Weapons</Link>
       </main>
     </>
   );

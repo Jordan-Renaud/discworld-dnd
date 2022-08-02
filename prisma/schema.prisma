@@ -72,18 +72,39 @@ model CharacterPrototype {
 
 // This is the archetype used by weapons
 // They will be used to create actual weapons which a character can wield
+enum AttackType {
+  SWING
+  THRUST
+}
+
+enum DamageType {
+  CRUSHING
+  CUTTING
+  IMPALING
+  SMALL_PIERCING
+}
+
+model DamageProperty {
+  id                     String                @id @default(cuid())
+  modifier               Int
+  attackType             AttackType
+  damageType             DamageType
+  MeleeWeaponPrototype   MeleeWeaponPrototype? @relation(fields: [meleeWeaponPrototypeId], references: [id])
+  meleeWeaponPrototypeId String?
+}
+
 model MeleeWeaponPrototype {
-  id          String  @id @default(cuid())
-  name        String
-  isThrowable Boolean
-  dexterity   Int
-  damage      Int
-  reach       Int
-  parry       Int
-  cost        Decimal
-  weight      Decimal
-  strength    Int
-  description String  @db.Text
+  id               String           @id @default(cuid())
+  name             String
+  isThrowable      Boolean
+  dexterity        Int
+  damageProperties DamageProperty[]
+  reach            Int
+  parry            Int
+  cost             Decimal
+  weight           Decimal
+  strength         Int
+  description      String           @db.Text
 }
 
 // This is the archetype used by weapons

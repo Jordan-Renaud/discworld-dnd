@@ -65,9 +65,10 @@ model VerificationToken {
 // This is the archetype used by characters
 // Will be used to create characters for a player
 model CharacterClassPrototype {
-  id         String      @id @default(cuid())
-  name       String
-  attributes Attribute[]
+  id                   String                @id @default(cuid())
+  name                 String
+  attributes           Attribute[]
+  personalityModifiers PersonalityModifier[]
 }
 
 // This is a player's character or NPC
@@ -232,14 +233,16 @@ model AttributeModifier {
 }
 
 model PersonalityModifier {
-  id          String              @id @default(cuid())
-  name        String
-  description String              @db.Text
-  points      Int
-  type        ModifierType
-  attributes  AttributeModifier[]
-  Character   Character?          @relation(fields: [characterId], references: [id])
-  characterId String?
+  id                        String                   @id @default(cuid())
+  name                      String
+  description               String                   @db.Text
+  points                    Int
+  type                      ModifierType
+  attributes                AttributeModifier[]
+  Character                 Character?               @relation(fields: [characterId], references: [id])
+  characterId               String?
+  CharacterClassPrototype   CharacterClassPrototype? @relation(fields: [characterClassPrototypeId], references: [id])
+  characterClassPrototypeId String?
 }
 
 model PersonalityModifierPrototype {

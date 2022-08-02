@@ -64,10 +64,39 @@ model VerificationToken {
 
 // This is the archetype used by characters
 // Will be used to create characters for a player
-model CharacterPrototype {
-  id     String @id @default(cuid())
-  name   String
-  points Int
+model CharacterClassPrototype {
+  id         String      @id @default(cuid())
+  name       String
+  attributes Attribute[]
+}
+
+// This is a player's character or NPC
+model Character {
+  id                   String                @id @default(cuid())
+  name                 String
+  money                Decimal
+  points               Int
+  attributes           Attribute[]
+  personalityModifiers PersonalityModifier[]
+  meleeWeapons         MeleeWeapon[]
+  missileWeapons       MissileWeapon[]
+  consumables          Consumable[]
+  clothes              Clothing[]
+  miscItems            MiscItem[]
+  occupation           Occupation            @relation(fields: [occupationId], references: [id])
+  occupationId         String
+}
+
+model Attribute {
+  id                        String                   @id @default(cuid())
+  name                      String
+  Acronym                   String
+  value                     Int
+  description               String
+  character                 Character?               @relation(fields: [characterId], references: [id])
+  characterId               String?
+  CharacterClassPrototype   CharacterClassPrototype? @relation(fields: [characterClassPrototypeId], references: [id])
+  characterClassPrototypeId String?
 }
 
 // This is the archetype used by weapons
@@ -102,15 +131,9 @@ model MissileWeaponPrototype {
   description String  @db.Text
 }
 
-// This is a player's character or NPC
-model Character {
-  id   String @id @default(cuid())
-  name String
-}
-
 // Tihs can be given to a character
 model MeleeWeapon {
-  id          String  @id @default(cuid())
+  id          String     @id @default(cuid())
   name        String
   isThrowable Boolean
   dexterity   Int
@@ -120,12 +143,14 @@ model MeleeWeapon {
   cost        Decimal
   weight      Decimal
   strength    Int
-  description String  @db.Text
+  description String     @db.Text
+  Character   Character? @relation(fields: [characterId], references: [id])
+  characterId String?
 }
 
 // Tihs can be given to a character
 model MissileWeapon {
-  id          String  @id @default(cuid())
+  id          String     @id @default(cuid())
   name        String
   isThrowable Boolean
   dexterity   Int
@@ -136,6 +161,8 @@ model MissileWeapon {
   weight      Decimal
   strength    Int
   shots       Int
+  Character   Character? @relation(fields: [characterId], references: [id])
+  characterId String?
 }
 
 model ClothingPrototype {
@@ -148,12 +175,14 @@ model ClothingPrototype {
 }
 
 model Clothing {
-  id               String  @id @default(cuid())
+  id               String     @id @default(cuid())
   name             String
   damageResistance Int
   cost             Decimal
   weight           Decimal
   description      String
+  Character        Character? @relation(fields: [characterId], references: [id])
+  characterId      String?
 }
 
 model ConsumablePrototype {
@@ -165,11 +194,13 @@ model ConsumablePrototype {
 }
 
 model Consumable {
-  id            String @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String
   perkValue     Int
   perkAttribute String
-  description   String @db.Text
+  description   String     @db.Text
+  Character     Character? @relation(fields: [characterId], references: [id])
+  characterId   String?
 }
 
 enum ModifierType {
@@ -187,14 +218,28 @@ model Occupation {
   description          String                         @db.Text
   personalityModifiers PersonalityModifierPrototype[]
   attributes           AttributeModifier[]
+  Character            Character[]
 }
 
 model AttributeModifier {
-  id                   String                         @id @default(cuid())
-  amount               Int
-  attribute            String
-  personalityModifiers PersonalityModifierPrototype[]
-  occupations          Occupation[]
+  id                    String                         @id @default(cuid())
+  amount                Int
+  attribute             String
+  personalityModifiers  PersonalityModifierPrototype[]
+  occupations           Occupation[]
+  PersonalityModifier   PersonalityModifier?           @relation(fields: [personalityModifierId], references: [id])
+  personalityModifierId String?
+}
+
+model PersonalityModifier {
+  id          String              @id @default(cuid())
+  name        String
+  description String              @db.Text
+  points      Int
+  type        ModifierType
+  attributes  AttributeModifier[]
+  Character   Character?          @relation(fields: [characterId], references: [id])
+  characterId String?
 }
 
 model PersonalityModifierPrototype {
@@ -216,9 +261,11 @@ model MiscItemPrototype {
 }
 
 model MiscItem {
-  id          String  @id @default(cuid())
+  id          String     @id @default(cuid())
   name        String
   cost        Decimal
   weight      Decimal
-  description String  @db.Text
+  description String     @db.Text
+  Character   Character? @relation(fields: [characterId], references: [id])
+  characterId String?
 }

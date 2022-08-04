@@ -89,7 +89,7 @@ model DamageProperty {
   modifier               Int
   attackType             AttackType
   damageType             DamageType
-  MeleeWeaponPrototype   MeleeWeaponPrototype? @relation(fields: [meleeWeaponPrototypeId], references: [id])
+  meleeWeaponPrototype   MeleeWeaponPrototype? @relation(fields: [meleeWeaponPrototypeId], references: [id])
   meleeWeaponPrototypeId String?
 }
 
@@ -112,7 +112,7 @@ model MeleeWeaponPrototype {
   strength         Int
   hold             Hold
   description      String           @db.Text
-  MeleeWeapon      MeleeWeapon[]
+  meleeWeapon      MeleeWeapon[]
 }
 
 // This is the archetype used by weapons

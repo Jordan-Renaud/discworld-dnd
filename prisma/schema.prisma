@@ -72,18 +72,47 @@ model CharacterPrototype {
 
 // This is the archetype used by weapons
 // They will be used to create actual weapons which a character can wield
+enum AttackType {
+  SWING
+  THRUST
+}
+
+enum DamageType {
+  CRUSHING
+  CUTTING
+  IMPALING
+  SMALL_PIERCING
+}
+
+model DamageProperty {
+  id                     String                @id @default(cuid())
+  modifier               Int
+  attackType             AttackType
+  damageType             DamageType
+  meleeWeaponPrototype   MeleeWeaponPrototype? @relation(fields: [meleeWeaponPrototypeId], references: [id])
+  meleeWeaponPrototypeId String?
+}
+
+enum Hold {
+  ONE_HANDED
+  TWO_HANDED
+  BOTH
+}
+
 model MeleeWeaponPrototype {
-  id          String  @id @default(cuid())
-  name        String
-  isThrowable Boolean
-  dexterity   Int
-  damage      Int
-  reach       Int
-  parry       Int
-  cost        Decimal
-  weight      Decimal
-  strength    Int
-  description String  @db.Text
+  id               String           @id @default(cuid())
+  name             String
+  isThrowable      Boolean
+  dexterity        Int
+  damageProperties DamageProperty[]
+  reach            String
+  parry            Int
+  cost             Decimal
+  weight           Decimal
+  strength         Int
+  hold             Hold
+  description      String           @db.Text
+  meleeWeapon      MeleeWeapon[]
 }
 
 // This is the archetype used by weapons
@@ -110,17 +139,13 @@ model Character {
 
 // Tihs can be given to a character
 model MeleeWeapon {
-  id          String  @id @default(cuid())
-  name        String
-  isThrowable Boolean
-  dexterity   Int
-  damage      Int
-  reach       Int
-  parry       Int
-  cost        Decimal
-  weight      Decimal
-  strength    Int
-  description String  @db.Text
+  id                     String               @id @default(cuid())
+  name                   String
+  description            String               @db.Text
+  meleeWeaponPrototype   MeleeWeaponPrototype @relation(fields: [meleeWeaponPrototypeId], references: [id])
+  damageModifier         Int
+  extraEffects           String
+  meleeWeaponPrototypeId String
 }
 
 // Tihs can be given to a character

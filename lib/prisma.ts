@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-export { DamageType, AttackType } from "@prisma/client";
+export { DamageType, AttackType, Hold } from "@prisma/client";
 
 // PrismaClient is attached to the `global` object in development to prevent
 // exhausting your database connection limit.

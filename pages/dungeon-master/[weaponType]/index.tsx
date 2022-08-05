@@ -12,6 +12,17 @@ interface WeaponPageProps {
   name: string;
 }
 
+function holdFormatter(hold) {
+  switch (hold) {
+    case "ONE_HANDED":
+      return "One Handed";
+    case "TWO_HANDED":
+      return "Two Handed";
+    case "BOTH":
+      return "One Handed and Two Handed";
+  }
+}
+
 export default function WeaponPage({ weapons, name }: WeaponPageProps) {
   return (
     <>
@@ -32,6 +43,7 @@ export default function WeaponPage({ weapons, name }: WeaponPageProps) {
           {weapons.map((weapon) => (
             <li key={weapon.id}>
               <article>
+                {console.log(weapon)}
                 <header>
                   <h3>{weapon.name}</h3>
                   <p>{weapon.description}</p>
@@ -45,7 +57,8 @@ export default function WeaponPage({ weapons, name }: WeaponPageProps) {
                         <th>Parry</th>
                         <th>Reach</th>
                         <th>Strength</th>
-                        <td>Weight</td>
+                        <th>Weight</th>
+                        <th>Hold</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -55,6 +68,7 @@ export default function WeaponPage({ weapons, name }: WeaponPageProps) {
                         <td>{weapon.reach}</td>
                         <td>{weapon.strength}</td>
                         <td>{weapon.weight.toString()}</td>
+                        <td>{holdFormatter(weapon.hold)}</td>
                       </tr>
                     </tbody>
                   </table>

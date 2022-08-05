@@ -11,24 +11,12 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
-  callbacks: {
-    async session({ session, user }) {
-      session.user.isDungeonMaster = user.isDungeonMaster;
-      return session;
-    },
-    async signIn({ user }) {
+  events: {
+    async createUser({ user }) {
       const dmEmail = process.env.DUNGEON_MASTER_EMAIL;
-      console.log(dmEmail);
+
       // Set/unset the DM
       try {
-        const foundUser = await prisma.user.findFirst({
-          where: { email: user.email },
-        });
-
-        if (!foundUser) {
-          return true;
-        }
-
         await prisma.user.update({
           where: { email: user.email },
           data: {
@@ -38,8 +26,12 @@ export default NextAuth({
       } catch (e) {
         console.error(e);
       }
-
-      return true;
+    }
+  },
+  callbacks: {
+    async session({ session, user }) {
+      session.user.isDungeonMaster = user.isDungeonMaster;
+      return session;
     },
   },
 });

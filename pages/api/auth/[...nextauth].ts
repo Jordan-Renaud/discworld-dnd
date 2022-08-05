@@ -1,7 +1,7 @@
-import NextAuth from "next-auth"
-import GithubProvider from "next-auth/providers/github"
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import prisma from "../../../lib/prisma"
+import NextAuth from "next-auth";
+import GithubProvider from "next-auth/providers/github";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "../../../lib/prisma";
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -13,21 +13,33 @@ export default NextAuth({
   ],
   callbacks: {
     async session({ session, user }) {
-      session.user.isDungeonMaster = user.isDungeonMaster
-      return session
+      session.user.isDungeonMaster = user.isDungeonMaster;
+      return session;
     },
     async signIn({ user }) {
-      const dmEmail = process.env.DUNGEON_MASTER_EMAIL
+      const dmEmail = process.env.DUNGEON_MASTER_EMAIL;
+      console.log(dmEmail);
       // Set/unset the DM
-      await prisma.user
-        .update({
+      try {
+        const foundUser = await prisma.user.findFirst({
+          where: { email: user.email },
+        });
+
+        if (!foundUser) {
+          return true;
+        }
+
+        await prisma.user.update({
           where: { email: user.email },
           data: {
-            isDungeonMaster: user.email === dmEmail
-          }
-        })
+            isDungeonMaster: user.email === dmEmail,
+          },
+        });
+      } catch (e) {
+        console.error(e);
+      }
 
-      return true
-    }
-  }
-})
+      return true;
+    },
+  },
+});

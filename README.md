@@ -45,3 +45,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - DB: Planetscale via Prisma
 - Auth: NextAuth with GitHub OAuth provider
+
+## Tips
+
+### Prisma
+
+- update schema `yarn db:update`

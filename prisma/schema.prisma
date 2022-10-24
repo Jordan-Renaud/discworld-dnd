@@ -129,6 +129,7 @@ model MissileWeaponPrototype {
   weight           Decimal
   strength         Int
   shots            Int
+  preparationTime  Int
   hold             Hold
   bulk             Int
   description      String           @db.Text

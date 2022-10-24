@@ -115,12 +115,14 @@ enum DamageType {
 }
 
 model DamageProperty {
-  id                     String                @id @default(cuid())
-  modifier               Int
-  attackType             AttackType
-  damageType             DamageType
-  meleeWeaponPrototype   MeleeWeaponPrototype? @relation(fields: [meleeWeaponPrototypeId], references: [id])
-  meleeWeaponPrototypeId String?
+  id                       String                  @id @default(cuid())
+  modifier                 Int
+  attackType               AttackType
+  damageType               DamageType
+  meleeWeaponPrototype     MeleeWeaponPrototype?   @relation(fields: [meleeWeaponPrototypeId], references: [id])
+  meleeWeaponPrototypeId   String?
+  MissileWeaponPrototype   MissileWeaponPrototype? @relation(fields: [missileWeaponPrototypeId], references: [id])
+  missileWeaponPrototypeId String?
 }
 
 enum Hold {
@@ -147,18 +149,20 @@ model MeleeWeaponPrototype {
 
 // This is the archetype used by weapons
 model MissileWeaponPrototype {
-  id          String  @id @default(cuid())
-  name        String
-  isThrowable Boolean
-  dexterity   Int
-  damage      Int
-  range       Int
-  parry       Int
-  cost        Decimal
-  weight      Decimal
-  strength    Int
-  shots       Int
-  description String  @db.Text
+  id               String           @id @default(cuid())
+  name             String
+  dexterity        Int
+  damageProperties DamageProperty[]
+  accuracy         Int
+  range            String
+  cost             Decimal
+  weight           Decimal
+  strength         Int
+  shots            Int
+  preparationTime  Int
+  hold             Hold
+  bulk             Int
+  description      String           @db.Text
 }
 
 // Tihs can be given to a character

@@ -51,3 +51,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ### Prisma
 
 - update schema `yarn db:update`
+- push changes to schema `yarn db:push`
+
+- seed database online `npx prisma db seed`

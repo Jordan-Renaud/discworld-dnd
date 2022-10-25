@@ -307,3 +307,23 @@ model MiscItem {
   Character   Character? @relation(fields: [characterId], references: [id])
   characterId String?
 }
+
+// start of replacement section for attributes + others
+
+model SocialTrait {
+  id             String                @id @default(cuid())
+  name           String
+  description    String
+  basePointsCost Int
+  categories     SocialTraitCategory[]
+}
+
+model SocialTraitCategory {
+  id            String       @id @default(cuid())
+  name          String
+  description   String
+  pointCost     Int
+  //something about modifiers
+  socialTrait   SocialTrait? @relation(fields: [socialTraitId], references: [id])
+  socialTraitId String?
+}

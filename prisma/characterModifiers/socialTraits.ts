@@ -74,7 +74,7 @@ export default function createSocialTraits() {
       },
     }),
 
-    /////////////////////////////////////////
+    //socialTraitCategory
 
     prisma.socialTraitCategory.create({
       data: {
@@ -227,45 +227,20 @@ export default function createSocialTraits() {
 
     prisma.socialTraitCategory.create({
       data: {
-        name: "",
-        description: "",
-        pointCost: 0,
+        name: "Disturbing Voice",
+        description:
+          "Your voice is unpleasant or obviously artificial. It might be raspy, hollow, or squeaky, or monotonous and uninflected. The most common version of this among normal humans is stuttering. You have -2 to reaction rolls. Certain occupations (interpreter, town crier, etc.) are closed to you.",
+        pointCost: -10,
         // socialTrait: { connect: { id: "gg" } },
       },
     }),
 
     prisma.socialTraitCategory.create({
       data: {
-        name: "",
-        description: "",
-        pointCost: 0,
-        // socialTrait: { connect: { id: "gg" } },
-      },
-    }),
-
-    prisma.socialTraitCategory.create({
-      data: {
-        name: "",
-        description: "",
-        pointCost: 0,
-        // socialTrait: { connect: { id: "gg" } },
-      },
-    }),
-
-    prisma.socialTraitCategory.create({
-      data: {
-        name: "",
-        description: "",
-        pointCost: 0,
-        // socialTrait: { connect: { id: "gg" } },
-      },
-    }),
-
-    prisma.socialTraitCategory.create({
-      data: {
-        name: "",
-        description: "",
-        pointCost: 0,
+        name: "Voice",
+        description:
+          "You have a clear and attractive voice, giving you +2 on reaction rolls and the skills listed.",
+        pointCost: 10,
         // socialTrait: { connect: { id: "gg" } },
       },
     }),

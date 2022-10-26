@@ -313,7 +313,7 @@ model MiscItem {
 model SocialTrait {
   id             String                @id @default(cuid())
   name           String
-  description    String
+  description    String                @db.Text
   basePointsCost Int
   categories     SocialTraitCategory[]
 }
@@ -321,7 +321,7 @@ model SocialTrait {
 model SocialTraitCategory {
   id            String       @id @default(cuid())
   name          String
-  description   String
+  description   String       @db.Text
   pointCost     Int
   //something about modifiers
   socialTrait   SocialTrait? @relation(fields: [socialTraitId], references: [id])
